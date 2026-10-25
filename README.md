@@ -77,12 +77,12 @@ All results are on Hugging Face; [**MemoryTax-Res**](https://huggingface.co/data
 
 | Repo | Contents |
 |---|---|
-| [MemoryTax-Res-Qwen3-6-27B](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-Qwen3-6-27B) | Main results with Qwen3.6-27B: QA outputs, judge verdicts, cost, and memory stores |
-| [MemoryTax-Res-Qwen3-5-4B](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-Qwen3-5-4B) | Same, with Qwen3.5-4B |
-| [MemoryTax-Res-GPT-5-6-luna](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-GPT-5-6-luna) | Same, with GPT-5.6-luna |
-| [MemoryTax-Res-experiential-mem](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-experiential-mem) | Experiential-memory results |
-| [MemoryTax-Res-world-model-mem](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-world-model-mem) | World-model-memory results |
-| [MemoryTax-Res-Other](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-Other) | Extra-benchmark results, RAG ablations, and more intermediates |
+| [Res-Qwen3-6-27B](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-Qwen3-6-27B) | Main results with Qwen3.6-27B: QA outputs, judge verdicts, cost, and memory stores |
+| [Res-Qwen3-5-4B](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-Qwen3-5-4B) | Same, with Qwen3.5-4B |
+| [Res-GPT-5-6-luna](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-GPT-5-6-luna) | Same, with GPT-5.6-luna |
+| [Res-experiential-mem](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-experiential-mem) | Experiential-memory results |
+| [Res-world-model-mem](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-world-model-mem) | World-model-memory results |
+| [Res-Other](https://huggingface.co/datasets/hexuan21/MemoryTax-Res-Other) | Extra-benchmark results, RAG ablations, and more intermediates |
 
 ## Citation
 
