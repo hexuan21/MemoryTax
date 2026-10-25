@@ -2,7 +2,6 @@
 
 | | |
 |---|---|
-| Category | Trained policy |
 | Official repo | [ahmedehabb/Memory-R2](https://github.com/ahmedehabb/Memory-R2) |
 | Pinned commit | [`352896d226`](https://github.com/ahmedehabb/Memory-R2/tree/352896d2260da4e14ae771541e630209486f6777) |
 | License | Apache-2.0 (applies to `upstream/`) |

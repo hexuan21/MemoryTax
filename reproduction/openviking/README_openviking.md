@@ -2,7 +2,6 @@
 
 | | |
 |---|---|
-| Category | Hier/Lifecycle |
 | Official repo | [volcengine/OpenViking](https://github.com/volcengine/OpenViking) |
 | Pinned commit | [`33043cb1b8`](https://github.com/volcengine/OpenViking/tree/33043cb1b83d7a69069eea8ac0da3c952666a1e1) |
 | License | AGPL-3.0 (applies to `upstream/`) |

@@ -2,7 +2,6 @@
 
 | | |
 |---|---|
-| Category | Flat store |
 | Official repo | [agiresearch/a-mem](https://github.com/agiresearch/a-mem) |
 | Pinned commit | [`ceffb860f0`](https://github.com/agiresearch/a-mem/tree/ceffb860f0712bbae97b184d440df62bc910ca8d) |
 | License | MIT (applies to `upstream/`) |

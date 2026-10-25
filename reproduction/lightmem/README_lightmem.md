@@ -2,7 +2,6 @@
 
 | | |
 |---|---|
-| Category | Hier/Lifecycle |
 | Official repo | [zjunlp/LightMem](https://github.com/zjunlp/LightMem) |
 | Pinned commit | [`8fc9a9179f`](https://github.com/zjunlp/LightMem/tree/8fc9a9179f9170c4a40fc653fcb410375900f26e) |
 | License | MIT (applies to `upstream/`) |

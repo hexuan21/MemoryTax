@@ -2,7 +2,6 @@
 
 | | |
 |---|---|
-| Category | Flat store |
 | Official repo | [MemTensor/MemOS](https://github.com/MemTensor/MemOS) |
 | Pinned commit | [`f4db521214`](https://github.com/MemTensor/MemOS/tree/f4db521214c29337164ec788bafede7eab236c25) |
 | License | Apache-2.0 (applies to `upstream/`) |
