@@ -1,7 +1,8 @@
-# MemoryTax
+# Memory Tax: Dissecting the Net Value of Agent Memory
 
 <p align="center">
   <img src="https://img.shields.io/badge/arXiv-coming%20soon-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv">
+  <a href="https://github.com/hexuan21/MemoryTax/blob/main/docs/Memory_Tax.pdf"><img src="https://img.shields.io/badge/Read-Paper-ec1c24?style=for-the-badge&logo=adobeacrobatreader&logoColor=white" alt="Read Paper"></a>
   <a href="https://hexuan21.github.io/MemoryTax/"><img src="https://img.shields.io/badge/Project-Page-1f8acb?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Project Page"></a>
   <a href="https://huggingface.co/datasets/hexuan21/MemoryTax-Res"><img src="https://img.shields.io/badge/HF-Res%20Data-ffd21e?style=for-the-badge&logo=huggingface&logoColor=white&labelColor=000000" alt="Res Data"></a>
   <img src="https://img.shields.io/badge/X-coming%20soon-000000?style=for-the-badge&logo=x&logoColor=white" alt="X">
@@ -15,6 +16,10 @@
 </p>
 
 ## TODO
+
+- [x] Release eval results in main experiments on HF
+- [x] Release ablations, analysis results and other intermediates
+- [ ] Release reproduction codes of each baseline
 
 ## Repository layout
 
