@@ -20,7 +20,3 @@ TODO: commands for LongMemEval-s / PersonaMem-v2 / MINT-Eval.
 ## Configuration
 
 TODO: retrieval top-k per benchmark and other settings used in the paper.
-
-## Changes to the official code
-
-TODO: describe the patches in `patches/`.
