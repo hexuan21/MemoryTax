@@ -1,15 +1,19 @@
 # MemoryTax
 
 <p align="center">
+  <img src="https://img.shields.io/badge/arXiv-coming%20soon-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv">
+  <a href="https://hexuan21.github.io/MemoryTax/"><img src="https://img.shields.io/badge/Project-Page-1f8acb?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Project Page"></a>
+  <a href="https://github.com/hexuan21/MemoryTax"><img src="https://img.shields.io/badge/Code-GitHub-181717?style=for-the-badge&logo=github&logoColor=white" alt="Code"></a>
+  <a href="https://huggingface.co/datasets/hexuan21/MemoryTax-Res"><img src="https://img.shields.io/badge/HF-Res%20Data-ffd21e?style=for-the-badge&logo=huggingface&logoColor=white&labelColor=000000" alt="Res Data"></a>
+  <img src="https://img.shields.io/badge/X-coming%20soon-000000?style=for-the-badge&logo=x&logoColor=white" alt="X">
+</p>
+
+<p align="center">
   <a href="#quickstart">🚀 Quick Start</a> •
   <a href="#baselines">🧩 Baselines</a> •
   <a href="#benchmarks">📚 Benchmarks</a> •
   <a href="#results">📊 Results</a>
 </p>
-
-Code and results for **"Memory Tax"**: the net value of agent memory over naive retrieval from raw history.
-
-> 🚧 Work in progress. Evaluation harnesses are being cleaned up and will be added per baseline.
 
 ## TODO
 
