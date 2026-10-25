@@ -1,0 +1,209 @@
+{
+ "benchmark": "PersonaMem-v2 (128k)",
+ "source_file": "benchmark/text/benchmark.csv",
+ "n_personas": 40,
+ "n_questions": 934,
+ "method": "group rows by chat_history_128k_link, sort the links as strings, keep the first 40 (all questions of each kept persona)",
+ "personas": [
+  {
+   "persona_id": "10",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona10.json",
+   "n_questions": 31
+  },
+  {
+   "persona_id": "101",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona101.json",
+   "n_questions": 26
+  },
+  {
+   "persona_id": "107",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona107.json",
+   "n_questions": 29
+  },
+  {
+   "persona_id": "110",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona110.json",
+   "n_questions": 26
+  },
+  {
+   "persona_id": "120",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona120.json",
+   "n_questions": 29
+  },
+  {
+   "persona_id": "136",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona136.json",
+   "n_questions": 26
+  },
+  {
+   "persona_id": "137",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona137.json",
+   "n_questions": 26
+  },
+  {
+   "persona_id": "139",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona139.json",
+   "n_questions": 28
+  },
+  {
+   "persona_id": "158",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona158.json",
+   "n_questions": 24
+  },
+  {
+   "persona_id": "168",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona168.json",
+   "n_questions": 34
+  },
+  {
+   "persona_id": "174",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona174.json",
+   "n_questions": 20
+  },
+  {
+   "persona_id": "184",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona184.json",
+   "n_questions": 28
+  },
+  {
+   "persona_id": "198",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona198.json",
+   "n_questions": 31
+  },
+  {
+   "persona_id": "199",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona199.json",
+   "n_questions": 19
+  },
+  {
+   "persona_id": "208",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona208.json",
+   "n_questions": 18
+  },
+  {
+   "persona_id": "209",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona209.json",
+   "n_questions": 26
+  },
+  {
+   "persona_id": "210",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona210.json",
+   "n_questions": 28
+  },
+  {
+   "persona_id": "213",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona213.json",
+   "n_questions": 23
+  },
+  {
+   "persona_id": "215",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona215.json",
+   "n_questions": 23
+  },
+  {
+   "persona_id": "218",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona218.json",
+   "n_questions": 24
+  },
+  {
+   "persona_id": "221",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona221.json",
+   "n_questions": 25
+  },
+  {
+   "persona_id": "23",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona23.json",
+   "n_questions": 29
+  },
+  {
+   "persona_id": "235",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona235.json",
+   "n_questions": 28
+  },
+  {
+   "persona_id": "237",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona237.json",
+   "n_questions": 37
+  },
+  {
+   "persona_id": "244",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona244.json",
+   "n_questions": 23
+  },
+  {
+   "persona_id": "247",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona247.json",
+   "n_questions": 35
+  },
+  {
+   "persona_id": "25",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona25.json",
+   "n_questions": 26
+  },
+  {
+   "persona_id": "254",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona254.json",
+   "n_questions": 26
+  },
+  {
+   "persona_id": "256",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona256.json",
+   "n_questions": 14
+  },
+  {
+   "persona_id": "259",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona259.json",
+   "n_questions": 12
+  },
+  {
+   "persona_id": "260",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona260.json",
+   "n_questions": 19
+  },
+  {
+   "persona_id": "261",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona261.json",
+   "n_questions": 17
+  },
+  {
+   "persona_id": "265",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona265.json",
+   "n_questions": 18
+  },
+  {
+   "persona_id": "275",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona275.json",
+   "n_questions": 11
+  },
+  {
+   "persona_id": "277",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona277.json",
+   "n_questions": 15
+  },
+  {
+   "persona_id": "280",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona280.json",
+   "n_questions": 17
+  },
+  {
+   "persona_id": "281",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona281.json",
+   "n_questions": 17
+  },
+  {
+   "persona_id": "289",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona289.json",
+   "n_questions": 17
+  },
+  {
+   "persona_id": "292",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona292.json",
+   "n_questions": 14
+  },
+  {
+   "persona_id": "294",
+   "chat_history_128k_link": "data/chat_history_128k/chat_history_250913_163556_persona294.json",
+   "n_questions": 15
+  }
+ ]
+}

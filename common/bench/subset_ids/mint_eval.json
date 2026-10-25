@@ -1,0 +1,109 @@
+{
+ "benchmark": "MINT-Eval (10% subset)",
+ "fraction": 0.1,
+ "method": "sample whole rows (corpus + all its questions); systematic sampling over rows sorted by corpus size, choosing the start offset whose question-type distribution is closest (L1) to the full set; two outlier-size corpora swapped for near-median ones",
+ "n_rows": 60,
+ "n_questions": 1557,
+ "variants": {
+  "multi_turn_dialogue": {
+   "ids": [
+    "sonnet-4.5__user_102",
+    "sonnet-4.5__user_113",
+    "sonnet-4.5__user_21",
+    "sonnet-4.5__user_4",
+    "sonnet-4.5__user_44",
+    "sonnet-4.5__user_45",
+    "sonnet-4.5__user_47",
+    "sonnet-4.5__user_78",
+    "sonnet-4.5__user_79",
+    "o3__user_103"
+   ],
+   "n_rows": 10,
+   "n_questions": 690,
+   "full": {
+    "n_rows": 100,
+    "n_questions": 6905
+   }
+  },
+  "state_tracking": {
+   "ids": [
+    "017",
+    "020",
+    "026",
+    "047",
+    "066",
+    "068",
+    "070",
+    "072",
+    "081",
+    "097"
+   ],
+   "n_rows": 10,
+   "n_questions": 563,
+   "full": {
+    "n_rows": 99,
+    "n_questions": 5656
+   }
+  },
+  "github_commits": {
+   "ids": [
+    "tblume1992/ThymeBoost",
+    "derar-alhussein/Databricks-Certified-Data-Engineer-Professional",
+    "b4ird/spotify_sync",
+    "Lichang-Chen/InstructZero",
+    "salesforce/booksum",
+    "yaodi833/trajectory2vec",
+    "TheExplainthis/ChatGPT-Tinder-Bot",
+    "stac-utils/pystac-client",
+    "patrickfuller/blender-chemicals",
+    "hustvl/BMaskR-CNN",
+    "bellshade/Python",
+    "phongthanhbuiit/whisper-realtime-gui",
+    "inngest/inngest-py",
+    "TonyLHansen/raspberry-pi-safe-off-switch",
+    "WellyZhang/RAVEN",
+    "cap-ntu/ML-Model-CI",
+    "RUCKBReasoning/codes",
+    "NVIDIA/nsight-python",
+    "pavitrakumar78/Anime-Face-GAN-Keras",
+    "DotNetRussell/BloodBash"
+   ],
+   "n_rows": 20,
+   "n_questions": 154,
+   "full": {
+    "n_rows": 200,
+    "n_questions": 1578
+   }
+  },
+  "wiki_revisions": {
+   "ids": [
+    "Calakmul",
+    "J\u012bvaka",
+    "Gilles Villeneuve",
+    "Windsor Castle",
+    "Ottawa Senators",
+    "Locked Out of Heaven",
+    "Mite",
+    "Assassin's Creed Origins",
+    "Valis: The Fantasm Soldier",
+    "Cannabis in Oregon",
+    "Doctor Who series 1",
+    "Kylie Platt",
+    "History of Sunderland A.F.C.",
+    "Assassination of Archduke Franz Ferdinand",
+    "North American XB-70 Valkyrie",
+    "Bioluminescence",
+    "System Shock",
+    "Vs. (Pearl Jam album)",
+    "Gary Roberts (footballer, born 1987)",
+    "Hurricane Wilma"
+   ],
+   "n_rows": 20,
+   "n_questions": 150,
+   "full": {
+    "n_rows": 196,
+    "n_questions": 1492
+   }
+  }
+ }
+}
