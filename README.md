@@ -2,7 +2,6 @@
 
 <p align="center">
   <a href="#quickstart">🚀 Quick Start</a> •
-  <a href="#repository-layout">📁 Layout</a> •
   <a href="#baselines">🧩 Baselines</a> •
   <a href="#benchmarks">📚 Benchmarks</a> •
   <a href="#results">📊 Results</a>
