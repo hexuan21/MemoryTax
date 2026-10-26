@@ -4,6 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Memory Tax</title>
+  <link rel="icon" type="image/svg+xml" href="static/images/favicon.svg">
   <meta name="description" content="Memory Tax: Dissecting the Net Value of Agent Memory. Many dedicated memory systems underperform naive RAG; we dissect their net value into memory benefit and memory tax.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
@@ -597,9 +598,9 @@
     </div>
     <div class="card dim" style="border-color:var(--accent);margin-top:18px">
         <h3>Benchmark Headroom <span class="q">- The evaluation side makes the <span class="tax">tax</span> more visible.</span></h3>
-        <p>Across more long-term memory benchmarks, simple retrieval already scores high: an IDF-keyword matcher passes 50% on some, and RAG-Hybrid reaches about 70%.</p>
+        <p>Across more long-term memory benchmarks, simple retrieval already scores high: an IDF-keyword matcher passes 50% on some, and RAG-Hybrid reaches about 70%. Such results suggest some current evaluation settings are relatively retrieval-friendly, leaving quite limited headroom for heavy memory to improve over naive retrieval.</p>
         <details class="cases">
-          <summary><i class="fas fa-chevron-right"></i>How the four retrieval-only baselines work, and what IDF-keyword tells us</summary>
+          <summary><i class="fas fa-chevron-right"></i>How the four simple baselines work</summary>
           <div class="cases-body">
             <p style="margin:0 0 10px">The four baselines are <b>No Memory</b>, <b>IDF-keyword</b>, <b>RAG-Emb</b> and <b>RAG-Hybrid</b>.
               <b>IDF-keyword</b> takes the two rarest words of the query (highest IDF in the corpus) and fills the top-<i>k</i> budget with chunks containing both, then either one,
