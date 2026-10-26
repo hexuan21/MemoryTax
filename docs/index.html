@@ -7,6 +7,9 @@
   <meta name="description" content="Memory Tax: Dissecting the Net Value of Agent Memory. Many dedicated memory systems underperform naive RAG; we dissect their net value into memory benefit and memory tax.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.4/css/academicons.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&family=IBM+Plex+Mono:wght@400;500;700&display=swap">
   <style>
     :root {
       --bg: #f7f3f2;
@@ -25,15 +28,14 @@
       --robust: #665495;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
     body {
       margin: 0; background: var(--bg); color: var(--fg);
-      font-family: -apple-system, "Segoe UI", "Noto Sans", Roboto, Helvetica, Arial, sans-serif;
+      font-family: "Source Serif 4", Georgia, "Times New Roman", serif;
       line-height: 1.6; overflow-x: clip;
     }
     a { color: var(--link); text-decoration: none; }
     a:hover { text-decoration: underline; }
-    .wrap { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+    .wrap { max-width: 1000px; margin: 0 auto; padding: 0 20px; }
     img { max-width: 100%; height: auto; display: block; }
 
     /* ---------- nav ---------- */
@@ -67,7 +69,7 @@
     section.block { padding: 34px 0 6px; scroll-margin-top: 50px; }
     /* Full-bleed white band behind each section heading. */
     h2.section-title {
-      font-size: 28px; margin: 0 0 22px; text-align: center; padding: 12px 20px;
+      font-size: 34px; margin: 0 0 22px; text-align: center; padding: 12px 20px;
       background: #fff; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
       width: 100vw; margin-left: calc(50% - 50vw); margin-right: calc(50% - 50vw);
     }
@@ -81,8 +83,8 @@
     }
     .tldr b.q { color: var(--accent); }
     .obs {
-      background: #eaf4ff; border: 1px solid #6aade4; border-radius: 10px;
-      padding: 12px 16px; margin: 14px 0; font-style: italic;
+      background: #f3f9ff; border: 1px solid #a9d0f0; border-radius: 10px;
+      padding: 12px 16px; margin: 14px 0; font-style: italic; font-weight: 700;
     }
     .benefit { color: var(--benefit); font-weight: 700; }
     .tax { color: var(--tax); font-weight: 700; }
@@ -102,12 +104,12 @@
       border-radius: 999px; padding: 6px 14px; font-size: 14px; cursor: pointer; font-family: inherit;
     }
     .pill.on { background: var(--accent); border-color: var(--accent); color: #fff; }
-    @media (min-width: 761px) { .pareto-pills { min-height: 84px; align-content: flex-start; } }
+    .pareto-pills + figure { margin-top: 4px; }
     .pill-group-label { font-size: 13px; color: var(--muted); align-self: center; margin-right: 2px; }
 
     /* ---------- tables ---------- */
     .tbl-wrap { overflow-x: auto; border: 1px solid var(--border); border-radius: 12px; background: var(--card); }
-    table { border-collapse: collapse; width: 100%; font-size: 14px; }
+    table { border-collapse: collapse; width: 100%; font-size: 14px; font-family: inherit; font-variant-numeric: tabular-nums; }
     th, td { padding: 7px 10px; text-align: center; white-space: nowrap; }
     thead th { background: #f4eeee; font-weight: 700; border-bottom: 1px solid var(--border); }
     tbody tr.grp-start td { border-top: 1px solid var(--border); }
@@ -124,7 +126,22 @@
     .tbl-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
     .legend-chip { display: inline-block; padding: 0 6px; border-radius: 4px; }
     .small-tbl td:first-child, .small-tbl th:first-child { text-align: left; }
-    .small-tbl td.sub { padding-left: 26px; color: var(--muted); }
+    .small-tbl td:first-child, .small-tbl th:first-child { width: 1%; }
+    #lb thead tr:first-child th:first-child, #lb td.name { width: 1%; }
+    #lb { font-size: 14px; }
+    #lb td.cat { font-size: 14px; }
+    #lb th, #lb td { padding: 4px 8px; line-height: 1.35; }
+    #lb tbody td:not(.name):not(.cat) { font-size: 16.5px; }
+    #lb td .d { font-size: 12px; }
+    .small-tbl td.sub { padding-left: 16px; color: var(--muted); }
+    .small-tbl td.na { background: #eeeeee; color: var(--muted); }
+    .grid2.faith { grid-template-columns: 1.7fr 1fr; }
+    .faith .small-tbl { font-size: 12.5px; }
+    .faith .small-tbl th, .faith .small-tbl td { padding: 5px 7px; }
+    .grid2.wm { grid-template-columns: 1.5fr 1fr; }
+    .wm .tbl-wrap { overflow-x: visible; }
+    .wm .small-tbl th, .wm .small-tbl td { padding: 7px 8px; }
+    @media (max-width: 760px) { .grid2.faith, .grid2.wm { grid-template-columns: 1fr; } .wm .tbl-wrap { overflow-x: auto; } }
     .good { background: rgba(78,139,95,.22); }
     .bad { background: rgba(181,83,75,.18); }
 
@@ -134,11 +151,12 @@
     .dim.a { border-color: var(--access); }
     .dim.r { border-color: var(--robust); }
     .dim h3 { margin-top: 0; }
-    .dim .q { color: var(--muted); font-size: 15px; margin-top: -6px; }
+    .dim h3 .q { color: var(--muted); font-size: .8em; font-weight: 500; }
     .impl { counter-reset: impl; }
     .impl .card { margin-bottom: 14px; }
     .impl h3 { margin: 0 0 6px; }
-    .impl .tag { font-size: 12px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); font-weight: 700; }
+    .impl .small-tbl th, .impl .small-tbl td { padding: 4px 9px; line-height: 1.3; }
+    .impl .tag { font-size: 14px; letter-spacing: .01em; color: var(--accent); font-weight: 700; }
 
     pre.bib { background: #1c2b33; color: #f2e4e6; border-radius: 12px; padding: 18px; overflow-x: auto; font-size: 13px; }
     footer { color: var(--muted); font-size: 13px; text-align: center; padding: 40px 0 30px; }
@@ -163,24 +181,18 @@
     .blob.b2 { width: 300px; height: 300px; background: #b9d6c2; bottom: -140px; right: -60px; animation-delay: -6s; }
     .blob.b3 { width: 240px; height: 240px; background: #f0c9a4; top: 30%; right: 20%; animation-delay: -12s; opacity: .35; }
     @keyframes drift { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(60px,40px) scale(1.15); } }
-    h1.title .mt { background: linear-gradient(90deg, #7a2e3a, #b5534b, #d98a55, #b5534b, #7a2e3a);
-      background-size: 200% auto; -webkit-background-clip: text; background-clip: text; color: transparent;
-      animation: shine 2s linear infinite; }
-    @keyframes shine { to { background-position: 200% center; } }
     .btn { transition: transform .2s ease, box-shadow .2s ease, background .2s ease; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 22px -10px rgba(122,46,58,.7); }
 
     .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 22px 0 0; }
     .stat { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 12px; text-align: center; }
-    .stat .num { font-size: 34px; font-weight: 800; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; }
+    .stat .num { font-size: 32px; font-weight: 800; line-height: 1.1; color: var(--accent); font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
     .stat-pair { display: grid; grid-template-columns: 1fr 1fr; }
     .stat-pair > div + div { border-left: 1px solid var(--border); }
     .stat .lbl { font-size: 14px; color: var(--muted); margin-top: 4px; }
     @media (max-width: 760px) { .stats { grid-template-columns: 1fr 1fr; } }
 
     h2.section-title { position: relative; }
-    h2.section-title::after { content: ""; display: block; width: 46px; height: 3px; margin: 8px auto 0; border-radius: 3px;
-      background: linear-gradient(90deg, var(--benefit), var(--tax)); }
 
     .equation { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px;
       margin: 18px 0 6px; font-size: 18px; font-weight: 700; }
@@ -197,6 +209,7 @@
     .obs { position: relative; padding-left: 44px; }
     .obs::before { content: "\f0eb"; font-family: "Font Awesome 6 Free"; font-weight: 900; font-style: normal;
       position: absolute; left: 16px; top: 12px; color: #3b8fd0; }
+    .obs .tk { font-style: normal; font-weight: 700; color: #3b8fd0; }
     #lb tbody tr:hover td { filter: brightness(.96); }
 
     .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
@@ -218,6 +231,172 @@
       transition: opacity .3s, transform .3s; font-size: 16px; }
     #totop.show { opacity: 1; transform: none; }
     #totop:hover { background: var(--accent); color: #fff; }
+    /* ---------- ledger and paired cases ---------- */
+    :root { --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace; --mark: #efe6c4; --raw: #f1f1f1; --mem: #eef4ef; }
+    mark { background: var(--mark); color: inherit; padding: 0 2px; border-radius: 3px; }
+    .controls { display: flex; flex-wrap: wrap; gap: 6px 22px; justify-content: center; }
+    .pill-label { font-size: 13px; color: var(--muted); margin-right: 2px; font-family: var(--mono); align-self: center; }
+    .ledger-grid { display: grid; grid-template-columns: 1fr 330px; gap: 22px; align-items: start; }
+    @media (max-width: 860px) { .ledger-grid { grid-template-columns: 1fr; } }
+    .ledger { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px 10px; }
+    .lrow { display: grid; grid-template-columns: 96px 1fr 52px 58px; gap: 10px; align-items: center; padding: 5px 6px;
+      border-radius: 8px; cursor: pointer; transition: background .2s; }
+    .lrow:hover { background: var(--tint); }
+    .lrow.sel { background: rgba(122,46,58,.08); }
+    .lrow.head { cursor: default; font-size: 12px; color: var(--muted); font-family: var(--mono); padding-bottom: 2px; }
+    .lrow.head:hover { background: none; }
+    .lrow .nm { font-weight: 600; font-size: 15px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .lrow .net { font-family: var(--mono); font-size: 14px; text-align: right; font-weight: 700; }
+    .lrow .mult { font-family: var(--mono); font-size: 12px; color: var(--muted); text-align: right; }
+    .bars { position: relative; height: 20px; display: grid; grid-template-columns: 1fr 1fr; }
+    .bars::after { content: ""; position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: rgba(28,43,51,.35); }
+    .bars .l, .bars .r { position: relative; height: 100%; }
+    .bars .l i, .bars .r i { position: absolute; top: 2px; bottom: 2px; width: 0; transition: width .6s cubic-bezier(.2,.8,.2,1); }
+    .bars .l i { right: 0; background: var(--tax); border-radius: 4px 0 0 4px; }
+    .bars .r i { left: 0; background: var(--benefit); border-radius: 0 4px 4px 0; }
+    .bars .l b, .bars .r b { position: absolute; top: 0; font-size: 11px; font-family: var(--mono); line-height: 20px; color: var(--muted); font-weight: 500; transition: right .6s, left .6s; }
+    @media (max-width: 600px) { .lrow { grid-template-columns: 78px 1fr 44px; } .lrow .mult { display: none; } .lrow .nm { font-size: 13px; } }
+    .ledger-note { font-size: 13px; color: var(--muted); margin: 8px 6px 2px; }
+    .receipt { font-family: var(--mono); font-size: 13px; background: #fffdf8; border: 1px solid var(--border); padding: 20px 20px 78px;
+      position: relative; box-shadow: 0 18px 40px -26px rgba(28,43,51,.5); line-height: 1.55; }
+    .receipt::after { content: ""; position: absolute; left: 0; right: 0; bottom: -8px; height: 8px;
+      background: linear-gradient(-45deg, transparent 6px, #fffdf8 0) 0 0 / 12px 8px repeat-x,
+                  linear-gradient(45deg, transparent 6px, #fffdf8 0) 0 0 / 12px 8px repeat-x; }
+    .receipt h4 { margin: 0 0 4px; text-align: center; font-size: 14px; letter-spacing: .14em; }
+    .receipt .sub { text-align: center; color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+    .receipt .ln { display: flex; justify-content: space-between; gap: 8px; }
+    .receipt .ln span:first-child { color: var(--muted); }
+    .receipt hr { border: 0; border-top: 1px dashed rgba(28,43,51,.35); margin: 9px 0; }
+    .receipt .tot { font-weight: 700; font-size: 15px; }
+    .receipt .tot span:first-child { color: var(--fg); }
+    .stamp { position: absolute; right: 18px; bottom: 34px; transform: rotate(-10deg); border: 3px solid; border-radius: 8px;
+      padding: 2px 8px; font-weight: 700; font-size: 15px; letter-spacing: .06em; opacity: .8; }
+    .stamp.neg { color: var(--tax); }
+    .stamp.pos { color: var(--benefit); }
+    .receipt.flash { animation: flash .45s ease; }
+    @keyframes flash { from { transform: translateY(-6px); opacity: .4; } to { transform: none; opacity: 1; } }
+    .edge-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 8px; }
+    @media (max-width: 760px) { .edge-pair { grid-template-columns: 1fr; } }
+    .ecard { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 18px 18px 14px; border-top: 5px solid; }
+    .ecard.b { border-top-color: var(--benefit); }
+    .ecard.t { border-top-color: var(--tax); }
+    .ecard .lab { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+    .ecard.b .lab { color: var(--benefit); }
+    .ecard.t .lab { color: var(--tax); }
+    .ecard .q { font-weight: 600; margin: 6px 0 10px; }
+    .ans { font-size: 14px; margin: 8px 0 4px; }
+    .ans .ok { color: var(--benefit); }
+    .ans .no { color: var(--tax); }
+    .snip { font-size: 14px; border-radius: 10px; padding: 8px 11px; margin: 4px 0; line-height: 1.5; }
+    .snip.raw { background: var(--raw); }
+    .snip.mem { background: var(--mem); }
+    .snip .who { display: block; font-size: 11px; color: var(--muted); font-family: var(--mono); }
+    .enote { font-size: 13.5px; font-style: italic; color: var(--muted); margin-top: 8px; }
+    .enote i { font-style: normal; margin-right: 4px; }
+    .ecard.b .enote i { color: var(--benefit); }
+    .ecard.t .enote i { color: var(--tax); }
+    #mech-pills { display: grid; grid-template-columns: repeat(3, auto); justify-content: center; }
+    @media (max-width: 600px) { #mech-pills { grid-template-columns: repeat(2, auto); } }
+    .mech-desc { font-size: 15px; color: var(--muted); margin: 0 0 6px; text-align: center; }
+    /* ---------- name wall under the hero ---------- */
+    .namewall { margin: 2px 0 16px; display: grid; gap: 10px; overflow: hidden;
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+    .nw-row { display: flex; width: max-content; animation: nw-scroll 55s linear infinite; }
+    .nw-row.rev { animation-direction: reverse; animation-duration: 62s; }
+    .namewall:hover .nw-row { animation-play-state: paused; }
+    .nw-row span { flex: none; margin-right: 10px; padding: 5px 14px; border-radius: 999px; font-size: 14px; white-space: nowrap;
+      background: #faf6f5; border: 1px solid var(--border); color: var(--muted); }
+    @keyframes nw-scroll { to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .nw-row { animation: none; } }
+    /* ---------- paper-count trend in the bubble ---------- */
+    .tldr.has-trend { display: grid; grid-template-columns: 240px 1fr; gap: 28px; align-items: center; text-align: left; }
+    .tldr.has-trend .tldr-text { min-width: 0; font-size: 18.5px; }
+    .tldr-text p { margin: 0 0 16px; }
+    .tldr-text p:last-child { margin-bottom: 0; }
+    @media (max-width: 760px) { .tldr.has-trend { grid-template-columns: 1fr; gap: 16px; } }
+    .trend { margin: 0; min-width: 0; }
+    .trend-head { font-size: 14px; color: var(--muted); margin-bottom: 18px; line-height: 1.35; }
+    .trend-big { font-size: 26px; font-weight: 800; color: var(--accent); margin-right: 4px; font-variant-numeric: tabular-nums; }
+    .trend-bars { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; align-items: end; height: 120px; padding-top: 16px; box-sizing: content-box; }
+    .trend-bars .b { position: relative; height: 100%; display: flex; align-items: flex-end; justify-content: center; }
+    .trend-bars .b i { display: block; width: 13px; height: 0; border-radius: 3px 3px 0 0; background: #d9b9bf;
+      transition: height .9s cubic-bezier(.2,.8,.2,1); }
+    .trend-bars .b.y26 i { background: var(--accent); }
+    .trend-bars .b.part i { background: repeating-linear-gradient(135deg, var(--accent) 0 4px, #b9767f 4px 8px); }
+    .trend-bars .b span { position: absolute; left: 50%; transform: translateX(-50%); font-family: var(--mono); font-size: 9.5px;
+      color: var(--muted); white-space: nowrap; transition: bottom .9s cubic-bezier(.2,.8,.2,1); bottom: 0; }
+    .trend-years { display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px; margin-top: 4px; }
+    .trend-years div { border-top: 1px solid var(--border); font-size: 12px; color: var(--muted); padding-top: 2px; font-family: var(--mono); text-align: center; }
+    .trend-note { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+    @media (max-width: 600px) { .trend-bars { height: 100px; } }
+    /* ---------- Q&A lead-in ---------- */
+    .qa { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 10px; margin: 0 0 18px; }
+    .qa-row { display: flex; align-items: center; gap: 12px; font-size: 19px; }
+    .qa-tag { flex: none; width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 16px; color: #fff; }
+    .qa-tag.q { background: var(--accent); }
+    .qa-tag.a { background: var(--benefit); }
+    .qa-row:first-child .qa-text { font-weight: 600; }
+    .qa-row:last-child .qa-text { color: var(--benefit); }
+    .sec-num { font-family: var(--mono); font-size: .62em; font-weight: 500; color: var(--accent); margin-right: 14px;
+      letter-spacing: .04em; vertical-align: .18em; }
+    /* ---------- collapsible case studies (faithfulness / accessibility) ---------- */
+    details.cases { margin: 16px 0 6px; border: 1px solid var(--border); border-radius: 12px; background: #fcfafa; }
+    details.cases summary { cursor: pointer; list-style: none; padding: 11px 16px; font-weight: 700; color: var(--accent); }
+    details.cases summary::-webkit-details-marker { display: none; }
+    details.cases summary i { font-size: 12px; margin-right: 10px; transition: transform .2s; }
+    details.cases[open] summary i { transform: rotate(90deg); }
+    details.cases summary:hover { background: var(--tint); border-radius: 12px; }
+    .cases-body { padding: 4px 16px 16px; }
+    .follow { display: grid; grid-template-columns: 1fr 1.25fr; gap: 18px; align-items: start; }
+    @media (max-width: 760px) { .follow { grid-template-columns: 1fr; } }
+    .lv { display: inline-block; font-family: var(--mono); font-size: 11px; font-weight: 700; color: #fff; border-radius: 4px; padding: 1px 7px; letter-spacing: .04em; }
+    .lv.nl { background: #4e7d6b; } .lv.pl { background: #b8913a; } .lv.ml { background: #b5534b; } .lv.nu { background: #6b7280; }
+    .sysrow { margin: 0 0 12px; opacity: 0; transform: translateX(10px); animation: slidein .45s ease forwards; }
+    @keyframes slidein { to { opacity: 1; transform: none; } }
+    .sysrow .hd { font-size: 14px; font-weight: 700; margin-bottom: 3px; }
+    .sysrow .hd .lv { margin-right: 6px; }
+    .nounit { font-size: 14px; color: var(--muted); font-style: italic; border: 1px dashed rgba(28,43,51,.3); border-radius: 10px; padding: 7px 11px; }
+    .lost { font-size: 13px; color: #9c7a3c; font-style: italic; margin-top: 3px; }
+    .replay { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 12px; }
+    @media (max-width: 760px) { .replay { grid-template-columns: 1fr; } }
+    .rcol { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px 16px; }
+    .rcol h4 { margin: 0 0 8px; font-size: 15px; display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+    .rbadge { font-family: var(--mono); font-size: 11px; font-weight: 700; color: #fff; border-radius: 4px; padding: 1px 7px; background: #b9b2b2; white-space: nowrap; transition: background .3s; }
+    .rbadge.hit { background: #4e7d6b; }
+    .rbadge.late { background: var(--tax); }
+    .runit { opacity: .28; filter: grayscale(1); transition: opacity .4s, filter .4s; margin-bottom: 8px; }
+    .runit.on { opacity: 1; filter: none; }
+    .runit .snip { white-space: pre-line; }
+    .rstatus { font-size: 15px; margin-top: 10px; min-height: 1.6em; }
+    /* ---------- robustness: animated accuracy drop ---------- */
+    .rb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 16px 0 6px; }
+    @media (max-width: 760px) { .rb-grid { grid-template-columns: 1fr; } }
+    .rb-panel { background: #fff; border: 1px solid var(--border); border-radius: 12px; padding: 12px 14px 8px; min-width: 0; }
+    .rb-title { text-align: center; font-weight: 700; font-size: 15px; margin-bottom: 6px; display: flex; justify-content: center; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .rb-title svg { width: 15px; height: 15px; vertical-align: -2px; }
+    .rb-row { display: grid; grid-template-columns: 88px 36px 1fr 58px; align-items: center; height: 26px; font-size: 13px; }
+    .rb-row.gs { border-top: 1px solid rgba(28,43,51,.25); }
+    .rb-row.rag { height: 30px; }
+    .rb-row .sy { font-weight: 700; white-space: nowrap; overflow: visible; }
+    .rb-row .bu { font-family: var(--mono); font-size: 11.5px; color: var(--muted); }
+    .rb-track { position: relative; height: 100%; }
+    .rb-ref { position: absolute; top: calc(50% - 7px); height: 14px; background: #e4e6ea; border-right: 2px solid #9aa0a8; }
+    .rb-seg { position: absolute; top: calc(50% - 2px); height: 4px; border-radius: 2px; transition: width 1.1s cubic-bezier(.3,.7,.2,1); }
+    .rb-m { position: absolute; top: 50%; width: 15px; height: 15px; transform: translate(-50%, -50%); z-index: 2; transition: left 1.1s cubic-bezier(.3,.7,.2,1); }
+    .rb-m svg { width: 100%; height: 100%; display: block; }
+    .rb-d { font-family: var(--mono); font-size: 12px; font-weight: 700; text-align: right; opacity: 0; transition: opacity .5s ease .9s; }
+    .rb-panel.go .rb-d { opacity: 1; }
+    .rb-axis { display: grid; grid-template-columns: 88px 36px 1fr 58px; font-family: var(--mono); font-size: 10.5px; color: var(--muted); margin-top: 2px; }
+    .rb-axis div { position: relative; height: 14px; border-top: 1px solid rgba(28,43,51,.2); }
+    .rb-axis div span { position: absolute; transform: translateX(-50%); top: 1px; }
+    .rb-grid-line { position: absolute; top: 0; bottom: 0; border-left: 1px dashed #ece6e6; }
+    .rb-replay { border: 1px solid var(--border); background: #fff; color: var(--accent); border-radius: 999px; padding: 6px 16px;
+      font-size: 14px; font-weight: 700; cursor: pointer; font-family: inherit; }
+    .rb-replay:hover { background: var(--accent); color: #fff; }
+    .rb-cap { color: var(--muted); font-size: 14px; text-align: center; margin: 6px 0 14px; }
+    @media (prefers-reduced-motion: reduce) { .rb-seg, .rb-m { transition: none; } }
   </style>
 </head>
 <body>
@@ -226,14 +405,11 @@
 <nav class="top">
   <div class="wrap">
     <a class="brand" href="#top">Memory Tax</a>
-    <a href="#abstract">Abstract</a>
     <a href="#leaderboard">Leaderboard</a>
-    <a href="#cost">Cost</a>
     <a href="#benefit-tax">Benefit vs. Tax</a>
     <a href="#sources">Inside the Tax</a>
     <a href="#generalization">Generalization</a>
-    <a href="#implications">Implications</a>
-    <a href="#bibtex">BibTeX</a>
+    <a href="#implications">Future Designs</a>
   </div>
 </nav>
 
@@ -254,22 +430,30 @@
         <sup>3</sup>Renmin University of China &nbsp; <sup>4</sup>Verdent.ai &nbsp; <sup>5</sup>University of Waterloo
       </p>
       <div class="btns">
-        <a class="btn" href="Memory_Tax.pdf"><i class="ai ai-arxiv" style="color:#e0453f"></i><span>Paper</span></a>
+        <a class="btn" href="https://hexuan21.github.io/MemoryTax/"><i class="ai ai-arxiv" style="color:#e0453f"></i><span>arXiv</span></a>
+        <a class="btn" href="Memory_Tax.pdf" target="_blank" rel="noopener"><i class="fas fa-file-pdf" style="color:#e0453f"></i><span>Read Paper</span></a>
         <a class="btn" href="https://github.com/hexuan21/MemoryTax"><i class="fab fa-github"></i><span>Code</span></a>
         <a class="btn" href="https://huggingface.co/datasets/hexuan21/MemoryTax-Res"><span>🤗</span><span>Results</span></a>
-        <a class="btn" href="#"><i class="fab fa-x-twitter"></i><span>X / Tweet</span></a>
+        <a class="btn" href="https://hexuan21.github.io/MemoryTax/"><i class="fab fa-x-twitter"></i><span>X / Tweet</span></a>
       </div>
       <img class="hero-logo" src="static/figures/uiuc_I.png" alt="University of Illinois Urbana-Champaign">
     </div>
-    <div class="tldr">
-      <b class="q">What is the net value of memory over naive RAG?</b>
-      Across 11 memory systems, 3 benchmarks and 3 backbones, many dedicated memory systems
-      <b>underperform naive RAG</b>. Memory is double-edged: it solves some queries RAG misses
-      (<span class="benefit">memory benefit</span>) but loses others RAG already solves
-      (<span class="tax">memory tax</span>).
+    <div class="tldr has-trend">
+      <div class="trend">
+        <div class="trend-bars" id="trend-bars"></div>
+        <div class="trend-years" id="trend-years"></div>
+        <div class="trend-note">Agent memory papers on arXiv per quarter since 2024. 2026 Q4 counts up to Oct 25.</div>
+      </div>
+      <div class="tldr-text">
+        <p>Agent memory has been booming in the last two years.</p>
+        <p>Yet a simple but fundamental question seems to be overlooked:<br>
+        <b class="q">How much does memory actually gain over a very straightforward baseline, such as naive RAG?</b></p>
+        <p>Across 11 representative memory systems, 3 benchmarks and 3 backbones, we find many dedicated memory systems
+        <b>underperform a naive RAG</b>. To better understand this, we propose <span class="tax">memory tax</span> in this paper. See our studies below.</p>
+      </div>
     </div>
     <div class="stats">
-      <div class="stat"><div class="num">11</div><div class="lbl">memory systems</div></div>
+      <div class="stat"><div class="num">11</div><div class="lbl">evaluated representative memory systems</div></div>
       <div class="stat"><div class="num"><span>90</span><span style="font-size:20px;color:var(--muted)"> / 99</span></div><div class="lbl">memory results below Naive RAG</div></div>
       <div class="stat"><div class="num"><span>200</span>+</div><div class="lbl">experiment runs</div></div>
       <div class="stat stat-pair">
@@ -279,36 +463,12 @@
     </div>
   </header>
 
-  <!-- ===================== Abstract ===================== -->
-  <section class="block" id="abstract">
-    <h2 class="section-title">Abstract</h2>
-    <div class="card lead">
-      <p>Memory is increasingly used in long-horizon agents, yet the net value of building memory over direct retrieval from raw history remains largely unclear.
-      Through a large-scale evaluation across multiple benchmarks and model backbones, we find many dedicated memory systems underperform naive RAG in many cases, indicating a negative net value.
-      Taking RAG as a reference, we dissect the net value of memory into the gains and losses over direct retrieval, termed memory benefit and <b>memory tax</b>.</p>
-      <p>These gains and losses arise because memory process changes how the raw information is organized and accessed. We view such changes as the double-edged deviations from the raw history. They are originally designed and introduced to benefit the task, for example by reorganizing facts or distilling preferences, but some may also remove or obscure evidence, giving rise to memory tax.</p>
-      <p style="margin-bottom:0">Since memory benefit reflects the expected gains of its design, we then focus more on the overlooked memory tax, study how it arises from the system and evaluation side, and generalize the concept to more application scenarios of memory.
-      We hope the notion of memory tax can provide a new lens and shift more attention from standalone performance to the net value of memory, informing more reliable memory designs and evaluations.</p>
-    </div>
-  </section>
-
   <!-- ===================== Leaderboard ===================== -->
   <section class="block" id="leaderboard">
-    <h2 class="section-title">Leaderboard</h2>
-    <p class="lead">Judge accuracy (%) of 11 memory systems on <b>LongMemEval-s</b>, <b>PersonaMem-v2</b> and <b>MINT-Eval</b>, each run on
-      <b>Qwen3.5-4B</b>, <b>Qwen3.6-27B</b> and <b>GPT-5.6 Luna (low)</b> with the same embedding model (Qwen3-Embedding-0.6B).
-      Retrieval budgets are aligned by <b>Retrieval Scope</b>, so every system sees at least as much of its store as RAG (1rd).</p>
-    <div class="tbl-wrap"><table id="lb"></table></div>
-    <p class="tbl-note"><b>Bold</b> = best, <u>underline</u> = second best per column (No / Gold Context excluded).
-      Cells are shaded by how far they <span class="legend-chip" style="background:rgba(226,140,80,.35)">fall below</span> or
-      <span class="legend-chip" style="background:rgba(95,160,210,.35)">rise above</span> RAG (2rd).
-      Full Context on MINT-Eval truncates stores above 250k tokens. 4B = Qwen3.5-4B, 27B = Qwen3.6-27B, Luna = GPT-5.6 Luna (low).</p>
-  </section>
-
-  <!-- ===================== Cost ===================== -->
-  <section class="block" id="cost">
-    <h2 class="section-title">Performance vs. Cost</h2>
-    <p class="lead">Memory systems usually pay far more tokens and LLM calls than RAG, often without a matching gain in accuracy. Bubble size is the memory store size in tokens.</p>
+    <h2 class="section-title"><span class="sec-num">01</span>Leaderboard</h2>
+    <p class="lead" style="text-align:center">Performance (%) of 11 memory systems on <b>LongMemEval-s</b>, <b>PersonaMem-v2</b> and <b>MINT-Eval</b>.<br>Each run on
+      <b>Qwen3.5-4B</b>, <b>Qwen3.6-27B</b> and <b>GPT-5.6 Luna (low)</b>.</p>
+    <p class="lead" style="text-align:center">Memory systems usually pay far more cost than RAG, but often without a matching gain in accuracy.</p>
     <div class="grid2">
       <div>
         <h3 style="text-align:center">Token cost</h3>
@@ -321,115 +481,157 @@
         <figure><img id="pareto-calls-img" alt="Pareto plot of accuracy vs LLM calls"></figure>
       </div>
     </div>
+    <div class="tbl-wrap" style="margin-top:30px"><table id="lb"></table></div>
+    <p class="tbl-note"><b>Bold</b> = best, <u>underline</u> = second best per column.
+      Cells are shaded by how far they <span class="legend-chip" style="background:rgba(226,140,80,.35)">fall below</span> or
+      <span class="legend-chip" style="background:rgba(95,160,210,.35)">rise above</span> RAG (2rd).</p>
   </section>
 
   <!-- ===================== Benefit vs Tax ===================== -->
   <section class="block" id="benefit-tax">
-    <h2 class="section-title">Memory Benefit vs. Memory Tax</h2>
-    <p class="lead">A memory system ingests the interaction history into a persistent memory, retrieves memory units for a query, and answers from them.
-      Naive chunk-based RAG keeps the raw history with minimal processing, so it is the natural reference for the <b>net value of building memory</b>.</p>
-    <p class="lead">A per-query comparison with RAG shows memory is <b>not uniformly worse</b>: it solves queries RAG misses, where organization or restructuring helps,
-      while losing queries RAG already solves, where evidence becomes lost, obscured, or harder to access.
-      Both come from the <b>inevitable deviations</b> memory introduces from the raw history.</p>
+    <h2 class="section-title"><span class="sec-num">02</span><span class="benefit">Memory Benefit</span> vs. <span class="tax">Memory Tax</span></h2>
+    <div class="qa">
+      <div class="qa-row"><span class="qa-text">But is memory worse than naive RAG in all cases?</span></div>
+      <div class="qa-row"><span class="qa-text"><b>Obviously NOT.</b></span></div>
+    </div>
+    <p class="lead">We match each memory system against naive RAG (1 round) on the same questions.
+      Some questions only the memory system gets right. That is the <span class="benefit">memory benefit</span>.
+      Other questions it fails but RAG gets right. That is the <span class="tax">memory tax</span>.
+      What is left after the <span class="tax">tax</span> is the net value of building memory.</p>
     <div class="equation">
       <span class="eq-chip nv"><span class="grad-bt">Net value of memory</span></span><span class="eq-op">=</span>
       <span class="eq-chip b"><i class="fas fa-arrow-trend-up"></i> Memory Benefit</span><span class="eq-op">−</span>
       <span class="eq-chip t"><i class="fas fa-arrow-trend-down"></i> Memory Tax</span>
     </div>
-    <div class="obs">Building memory has a dual nature and we call the two sides <span class="benefit">Memory Benefit</span> and <span class="tax">Memory Tax</span>, with their balance defining net value of memory.</div>
-    <div class="grid2">
-      <figure><img src="static/figures/4_venn_lme_27b.png" alt="Venn plots of per-query correctness, memory vs RAG, LongMemEval-s with Qwen3.6-27B" loading="lazy">
-        <figcaption>LongMemEval-s, Qwen3.6-27B</figcaption></figure>
-      <figure><img src="static/figures/venn_lme_luna.png" alt="Venn plots of per-query correctness, memory vs RAG, LongMemEval-s with GPT-5.6 Luna" loading="lazy">
-        <figcaption>LongMemEval-s, GPT-5.6 Luna</figcaption></figure>
-      <figure><img src="static/figures/venn_persona_27b.png" alt="Venn plots of per-query correctness, memory vs RAG, PersonaMem-v2 with Qwen3.6-27B" loading="lazy">
-        <figcaption>PersonaMem-v2, Qwen3.6-27B</figcaption></figure>
-      <figure><img src="static/figures/4_venn_mint_luna.png" alt="Venn plots of per-query correctness, memory vs RAG, MINT-Eval with GPT-5.6 Luna" loading="lazy">
-        <figcaption>MINT-Eval, GPT-5.6 Luna</figcaption></figure>
+    <div class="controls">
+      <div class="pills" id="bill-base"><span class="pill-label">backbone</span></div>
+      <div class="pills" id="bill-bench"><span class="pill-label">benchmark</span></div>
     </div>
-    <p style="text-align:center;color:var(--muted);font-size:14px;margin-top:-6px">Per-query correctness of each memory system vs. RAG (1rd).</p>
+    <div class="ledger-grid">
+      <div class="ledger">
+        <div class="lrow head"><span>system</span><span style="display:flex;justify-content:space-between"><span class="tax">◀ tax</span><span class="benefit">benefit ▶</span></span><span style="text-align:right">net</span><span class="mult">tokens</span></div>
+        <div id="ledger"></div>
+        <p class="ledger-note">Sorted by net value. "Tokens" is the LLM token bill relative to RAG (1rd). Click a row to print its receipt.</p>
+      </div>
+      <div class="receipt" id="receipt"></div>
+    </div>
+
+    <h3 style="text-align:center;margin-top:44px">The same design choice wins one question and loses the next</h3>
+    <ul class="lead" style="padding-left:22px;margin:0 0 14px">
+      <li>Any nontrivial memory process introduces deviations from the raw history, such as extracting atomic facts, linking sessions, anchoring time or rewriting content.</li>
+      <li>These deviations are intended to better serve future queries, yet some may also have unintended harmful effects due to particular design choices.</li>
+      <li>We identify some representative mechanisms of agent memory below, and the same mechanism can bring <span class="benefit">memory benefit</span> on one question (left) and <span class="tax">memory tax</span> on another (right).</li>
+    </ul>
+    <div class="pills" id="mech-pills"></div>
+    <p class="mech-desc" id="mech-desc"></p>
+    <div class="edge-pair" id="edge-pair"></div>
   </section>
 
   <!-- ===================== Sources of tax ===================== -->
   <section class="block" id="sources">
-    <h2 class="section-title">Inside the Memory Tax</h2>
-    <p class="lead">Memory benefit largely reflects the intended value of a design. We focus on the overlooked side and trace memory tax along three system-side dimensions, plus one evaluation-side factor.</p>
+    <h2 class="section-title"><span class="sec-num">03</span>Inside the <span class="tax">Memory Tax</span></h2>
+    <p class="lead"><span class="benefit">Memory benefit</span> largely reflects the intended value of a memory design.<br>
+      So we focus on the overlooked side — <span class="tax">memory tax</span>, and trace it along three dimensions, while also considering some evaluation-side factors.</p>
 
     <div class="card dim f" style="margin-top:18px">
-      <h3>1 · Faithfulness</h3>
-      <p class="q">How well is the information preserved?</p>
-      <p>We denote the raw turns holding the evidence as <b>gold raw turns</b> and their constructed memory units as <b>gold memory units</b>.
-        Replaying QA with only gold memory units removes retrieval failures, so the remaining tax reflects losses in construction.
-        Tracing sampled atomic facts into memory units shows that information loss does exist in many systems.</p>
-      <div class="grid2">
-        <figure style="margin-top:0"><img src="static/figures/4_oracle_compare.png" alt="Original accuracy vs accuracy with gold memory units, and memory tax before and after" loading="lazy">
-          <figcaption>Original vs. with gold memory units (bars); boxed numbers are the memory tax before and after.</figcaption></figure>
-        <div>
-          <div class="tbl-wrap">
-            <table class="small-tbl">
-              <thead><tr><th>Method</th><th>NL</th><th>PL</th><th>ML</th><th>NU</th></tr></thead>
-              <tbody>
-                <tr><td>MemOS</td><td>85.8</td><td>9.0</td><td>2.4</td><td>2.8</td></tr>
-                <tr><td>SimpleMem</td><td>65.6</td><td>27.6</td><td>2.2</td><td>4.6</td></tr>
-                <tr><td>MemoryOS</td><td>98.4</td><td>0.0</td><td>0.0</td><td>1.6</td></tr>
-                <tr><td>LightMem</td><td>76.2</td><td>13.6</td><td>0.6</td><td>9.6</td></tr>
-                <tr><td>OpenViking</td><td>39.4</td><td>9.6</td><td>13.0</td><td>38.0</td></tr>
-                <tr><td>MAGMA</td><td>93.6</td><td>6.2</td><td>0.2</td><td>0.0</td></tr>
-                <tr><td>PlugMem</td><td>79.6</td><td>10.8</td><td>5.2</td><td>4.4</td></tr>
-                <tr><td>Memory-R2</td><td>72.6</td><td>14.8</td><td>6.0</td><td>6.6</td></tr>
-              </tbody>
-            </table>
+      <h3>1 · Faithfulness <span class="q">- How well is the information preserved?</span></h3>
+      <p>Memory operations such as compression and rewriting may drop or distort evidence before retrieval begins, and such loss cannot be recovered later.
+        To measure it, we first locate the raw turns that hold the evidence (<b>gold raw turns</b>) and the memory units built from them (<b>gold memory units</b>).
+        We then answer each question with only its gold memory units. This takes retrieval out of the picture, so any remaining <span class="tax">tax</span> comes from information lost during construction.</p>
+      <figure><img style="max-width:760px" src="static/figures/4_oracle_compare.png" alt="Original accuracy vs accuracy with gold memory units, and memory tax before and after" loading="lazy">
+          <figcaption>Original vs. with gold memory units (bars); boxed numbers are the <span class="tax">memory tax</span> before and after.</figcaption></figure>
+      <details class="cases">
+        <summary><i class="fas fa-chevron-right"></i>Case studies: what each system kept from one sentence</summary>
+        <div class="cases-body">
+          <div class="pills" id="follow-pills"></div>
+          <div class="follow">
+            <div>
+              <div class="snip raw" id="follow-raw"></div>
+              <div class="ans" id="follow-q"></div>
+            </div>
+            <div id="follow-sys"></div>
           </div>
-          <p class="tbl-note">Information loss of sampled atomic facts (%): no loss (NL), partial loss (PL), major loss (ML), no memory unit (NU).</p>
         </div>
-      </div>
-      <div class="obs">Information loss with varying severity during the memory process becomes a direct cause of memory tax.</div>
+      </details>
+      <div class="obs"><span class="tk">Takeaway:</span> Information loss with varying severity during the memory process becomes a direct cause of <span class="tax">memory tax</span>.</div>
     </div>
 
     <div class="card dim a" style="margin-top:18px">
-      <h3>2 · Accessibility</h3>
-      <p class="q">How easily can stored information be accessed?</p>
-      <p>Replaying retrieval for multiple rounds, memory systems recover fewer queries than RAG in the first round: relevant evidence is buried deeper.
-        Case studies show evidence <b>fragmented</b> across units, <b>diluted</b> with unrelated content, or <b>rephrased</b>, which shifts its similarity to the query.</p>
+      <h3>2 · Accessibility <span class="q">- How easily can stored information be accessed?</span></h3>
+      <p>Even when evidence survives construction, it still has to be found at query time.
+        We replay retrieval round after round over each memory store and record when all gold memory units have come back.
+        Compared with raw chunks, memory systems recover fewer questions in the first round, so the evidence is buried deeper.
+        Case studies point to three patterns: evidence is <b>fragmented</b> across units, <b>diluted</b> by unrelated content, or <b>rephrased</b> so it no longer matches the query.</p>
       <figure><img src="static/figures/4_access_rounds_lme_27b.png" alt="Retrieval rounds needed to fully retrieve the evidence, raw chunks vs memory units" loading="lazy">
         <figcaption>Retrieval rounds needed for the evidence to be fully retrieved, raw chunks vs. memory units (LongMemEval-s, Qwen3.6-27B).</figcaption></figure>
       <figure><img src="static/figures/4_access_drift_psn_27b.png" alt="Similarity of query to gold raw turn vs query to gold memory unit" loading="lazy">
         <figcaption>Similarity of (query, gold raw turn) vs. <span style="color:#dd8452;font-weight:700">(query, gold memory unit)</span>: overall drift (left) and point-wise difference (right), PersonaMem-v2.</figcaption></figure>
-      <div class="obs">Memory process can reduce evidence accessibility by fragmenting, diluting, or rephrasing it, creating memory tax even when evidence is not lost.</div>
+      <details class="cases" id="replay-cases">
+        <summary><i class="fas fa-chevron-right"></i>Case studies: in which retrieval round the evidence comes back</summary>
+        <div class="cases-body">
+          <div class="pills" id="replay-pills"></div>
+          <div class="ans" id="replay-q" style="font-size:16px"></div>
+          <div class="replay">
+            <div class="rcol"><h4>RAG (1rd) <span class="rbadge" id="rag-badge"></span></h4><div id="rag-col"></div></div>
+            <div class="rcol"><h4 id="mem-h"></h4><div id="mem-col"></div></div>
+          </div>
+          <div class="rstatus" id="rstatus"></div>
+        </div>
+      </details>
+      <div class="obs"><span class="tk">Takeaway:</span> Memory process can reduce evidence accessibility by fragmenting, diluting, or rephrasing it, creating <span class="tax">memory tax</span> even when evidence is not lost.</div>
     </div>
 
     <div class="card dim r" style="margin-top:18px">
-        <h3>3 · Robustness</h3>
-        <p class="q">How robust is memory across backbones?</p>
-        <p>We build memory with one backbone and answer with another. With construction fixed, changing the QA backbone causes a larger drop than for RAG in many systems.</p>
-        <figure><img style="max-width:620px" src="static/figures/4_robust_arrow.png" alt="Accuracy drop when changing the QA backbone, per construction model" loading="lazy">
-          <figcaption>Each row fixes the construction model; segments show the accuracy drop, <span class="tax">red</span> if larger than RAG's (grey), <span class="benefit">green</span> otherwise.</figcaption></figure>
-        <div class="obs">Memory process can amplify backbone sensitivity since model-dependent operations add variability to raw history.</div>
+        <h3>3 · Robustness <span class="q">- How robust is memory across backbones?</span></h3>
+        <p>A long-lived agent may build its memory with one model and later read it with another.
+          To test this, we build memory with each of the three backbones and then swap the model that answers.
+          Two patterns emerge. First, with the answering model fixed, changing the construction model already shifts the score. This is expected,
+          since memory operations rely on the backbone and can produce different memory items from the same history.
+          <b>More interestingly</b>, with the memory store fixed, changing the answering model causes a larger drop than it does for RAG in many systems.
+          So <span class="tax">memory tax</span> also shows up as reduced robustness to backbone changes.</p>
+        <div class="rb-grid" id="robust"></div>
+        <div style="text-align:center"><button class="rb-replay" id="rb-replay"><i class="fas fa-rotate-right"></i> Replay</button></div>
+        <p class="rb-cap">Each row fixes the construction model. The weaker QA model's marker slides from the stronger QA model's score to its own,
+          drawing the accuracy drop: <span class="tax">red</span> if it drops more than RAG (grey bar), <span class="benefit">green</span> otherwise.</p>
+        <div class="obs"><span class="tk">Takeaway:</span> Memory process can amplify backbone sensitivity since model-dependent operations add variability to raw history.</div>
     </div>
     <div class="card dim" style="border-color:var(--accent);margin-top:18px">
-        <h3>+ Benchmark Headroom</h3>
-        <p class="q">The evaluation side makes the tax more visible.</p>
+        <h3>Benchmark Headroom <span class="q">- The evaluation side makes the <span class="tax">tax</span> more visible.</span></h3>
         <p>Across more long-term memory benchmarks, simple retrieval already scores high: an IDF-keyword matcher passes 50% on some, and RAG-Hybrid reaches about 70%.</p>
+        <details class="cases">
+          <summary><i class="fas fa-chevron-right"></i>How the four retrieval-only baselines work, and what IDF-keyword tells us</summary>
+          <div class="cases-body">
+            <p style="margin:0 0 10px">The four baselines are <b>No Memory</b>, <b>IDF-keyword</b>, <b>RAG-Emb</b> and <b>RAG-Hybrid</b>.
+              <b>IDF-keyword</b> takes the two rarest words of the query (highest IDF in the corpus) and fills the top-<i>k</i> budget with chunks containing both, then either one,
+              with no embedding, reranker or LLM involved.</p>
+            <p style="margin:0">When such a crude matcher already scores above 50%, many questions can be answered by matching one or two distinctive words,
+              which leaves little headroom for memory processing.</p>
+          </div>
+        </details>
         <figure><img style="max-width:540px" src="static/figures/4_bench_saturate.png" alt="Scores of retrieval baselines on more memory benchmarks" loading="lazy">
           <figcaption>Retrieval baselines on more memory benchmarks with Qwen3.6-27B.</figcaption></figure>
-        <div class="obs">When naive RAG already solves many queries, memory has less room for gains and even modest losses become apparent.</div>
+        <div class="obs"><span class="tk">Takeaway:</span> When naive RAG already solves many queries, memory has less room for gains and even modest losses become apparent.</div>
+        <p style="margin:14px 0 0">On the other hand, many real-world queries are also naturally retrieval-friendly, making such accurate recall tasks essential and meaningful in its own right.
+          Current benchmarks contain a large share of such queries, and future evaluations could complement them with harder settings.
+          Moreover, reporting memory systems alongside naive RAG can <b>make remaining improvement room more explicit</b>, which also helps clarify the contribution of built memory.
+          RAG scores can also serve as a reference for <b>calibrating difficulty and leaving meaningful room</b> for more reliable evaluations.</p>
     </div>
   </section>
 
   <!-- ===================== Generalization ===================== -->
   <section class="block" id="generalization">
-    <h2 class="section-title">Generalizing Memory Tax</h2>
-    <p class="lead">The benefit-tax view is not tied to conversational memory: any nontrivial memory operation can deviate from the source in both directions.</p>
+    <h2 class="section-title"><span class="sec-num">04</span>Generalizing <span class="tax">Memory Tax</span></h2>
+    <p class="lead">The <span class="benefit">benefit</span>-<span class="tax">tax</span> view is not tied to conversational memory: any nontrivial memory operation can deviate from the source and have the double-edged effects.</p>
 
-    <h3>Experiential memory</h3>
+    <h3>1 · Experiential memory</h3>
     <p>Agents accumulate experience on training tasks and reuse it on test tasks (Qwen3.5-4B), across embodied (ALFWorld), web (WebShop, Mind2Web), coding (BigCodeBench) and tool use (AppWorld, τ²-Bench).
       Distilled workflows beat naive trajectory RAG on web tasks, while several memory methods fall behind it on tool use.</p>
     <figure><img src="static/figures/5_evo_scorebar_twin.png" alt="Experiential memory results on agent benchmarks" loading="lazy">
       <figcaption>Memory baselines are green when above RAG and red otherwise.</figcaption></figure>
 
-    <h3>World-model memory</h3>
+    <h3>2 · World-model memory</h3>
     <p>For long-horizon scene consistency, directly retrieving and reinjecting past frames stays strong, while latent- or cache-based memories do not consistently beat it.</p>
-    <div class="grid2">
+    <div class="grid2 wm">
       <div>
         <div class="tbl-wrap">
           <table class="small-tbl">
@@ -455,50 +657,62 @@
         <p class="tbl-note" style="text-align:center">Example frame sequences for testing long-horizon scene consistency.</p>
       </div>
     </div>
-    <div class="obs">Memory process in a broader sense also introduces both beneficial and harmful deviations from the original information, making memory benefit and tax generalizable across memory forms and scenarios.</div>
+    <div class="obs"><span class="tk">Takeaway:</span> Memory process in a broader sense also introduces both beneficial and harmful deviations from the original information, making <span class="benefit">memory benefit</span> and <span class="tax">tax</span> generalizable across memory forms and scenarios.</div>
   </section>
 
   <!-- ===================== Implications ===================== -->
   <section class="block" id="implications">
-    <h2 class="section-title">Design Implications</h2>
-    <p class="lead">Simple changes that reduce or compensate for memory tax on existing systems, without a new architecture and without test-time scaling such as deeper retrieval or stronger backbones.</p>
+    <h2 class="section-title"><span class="sec-num">05</span>Design Implications</h2>
+    <p class="lead">We also provide some simple changes that reduce or compensate for <span class="tax">memory tax</span> on existing systems, without a new architecture and without test-time scaling such as deeper retrieval or stronger backbones.</p>
     <div class="grid2 impl">
       <div>
-        <div class="card"><div class="tag">Construction</div><h3>Make Deviations Recoverable</h3>
-          <p style="margin:0">Keep a lightweight path back to the source: retrieve from raw history alongside memory and rerank them jointly (<b>src-aug</b>). This restores evidence lost in construction or missed in access.</p></div>
-        <div class="card"><div class="tag">Access</div><h3>Recursive or Self-Referential Memory</h3>
-          <p style="margin:0">Memory can "remember how it remembers": past queries, evidence and retrieval paths become memory sources (<b>recursive</b>), so evidence found in deep rounds is directly reachable next time.</p></div>
-        <div class="card"><div class="tag">Beyond Memory Operations</div><h3>Modeling Future Demand</h3>
-          <p style="margin:0">Between ahead-of-time and just-in-time memory, past interests and access patterns give a prior over what will matter, treating memory as an implicit recommendation system.</p></div>
+        <div class="card"><div class="tag">Memory Construction</div><h3>Make Deviations Recoverable</h3>
+          <p style="margin:0">Memory operations inevitably deviate from the raw history, and no single design fits every future need.
+          Since harmful deviations are hard to remove entirely, a more practical goal is to make them <b>recoverable</b> through a lightweight path back to the source.
+          As a proof of concept, we retrieve from the raw history alongside memory and rerank both jointly (<b>src-aug</b>).</p></div>
       </div>
       <div>
         <div class="tbl-wrap">
           <table class="small-tbl">
             <thead>
               <tr><th rowspan="2">Method</th><th colspan="2">LongMemEval-s</th><th colspan="2">PersonaMem-v2</th></tr>
-              <tr><th>Acc ↑</th><th>Tax ↓</th><th>Acc ↑</th><th>Tax ↓</th></tr>
+              <tr><th>Acc ↑</th><th class="tax">Tax ↓</th><th>Acc ↑</th><th class="tax">Tax ↓</th></tr>
             </thead>
             <tbody>
               <tr><td><b>SimpleMem</b></td><td>73.6</td><td>12.0</td><td>46.7</td><td>11.2</td></tr>
               <tr><td class="sub">+ src-aug</td><td class="good">82.8</td><td class="good">5.2</td><td class="good">49.6</td><td class="good">7.2</td></tr>
-              <tr><td class="sub">+ recursive</td><td>N/A</td><td>N/A</td><td class="good">46.8</td><td class="bad">12.1</td></tr>
+              <tr><td class="sub">+ recursive</td><td class="na">N/A</td><td class="na">N/A</td><td class="good">46.8</td><td class="bad">12.1</td></tr>
               <tr class="grp-start"><td><b>MemoryOS</b></td><td>73.4</td><td>11.4</td><td>48.2</td><td>17.1</td></tr>
               <tr><td class="sub">+ src-aug</td><td class="good">76.4</td><td class="good">7.8</td><td class="good">53.0</td><td class="good">8.5</td></tr>
-              <tr><td class="sub">+ recursive</td><td>N/A</td><td>N/A</td><td class="good">49.1</td><td class="good">16.4</td></tr>
+              <tr><td class="sub">+ recursive</td><td class="na">N/A</td><td class="na">N/A</td><td class="good">49.1</td><td class="good">16.4</td></tr>
               <tr class="grp-start"><td><b>Mem-T</b></td><td>75.0</td><td>10.8</td><td>42.1</td><td>15.2</td></tr>
               <tr><td class="sub">+ src-aug</td><td class="good">80.0</td><td class="good">5.2</td><td class="good">49.0</td><td class="good">8.7</td></tr>
-              <tr><td class="sub">+ recursive</td><td>N/A</td><td>N/A</td><td class="good">45.7</td><td class="good">13.6</td></tr>
+              <tr><td class="sub">+ recursive</td><td class="na">N/A</td><td class="na">N/A</td><td class="good">45.7</td><td class="good">13.6</td></tr>
             </tbody>
           </table>
         </div>
-        <p class="tbl-note">Accuracy and memory tax (%) with Qwen3.6-27B. LongMemEval-s has one query per corpus, so inter-query mechanisms do not apply.</p>
+        <p class="tbl-note">Accuracy and <span class="tax">memory tax</span> (%) with Qwen3.6-27B. LongMemEval-s has one query per corpus, so inter-query mechanisms do not apply.</p>
       </div>
+    </div>
+    <div class="impl" style="margin-top:6px">
+      <div class="card"><div class="tag">Memory Access</div><h3>Recursive or Self-Referential Memory</h3>
+          <p style="margin:0"><span class="tax">Memory tax</span> shows up in actual use, when evidence becomes harder to access or is found only after a deep search.
+          That retrieval experience can feed back into memory construction and improve access for similar future information needs.
+          <br>Inspired by recent progress in RSI, where an agent is expected to <b>"improve how it improves"</b>, memory can similarly <b>"remember how it remembers"</b>.
+          As a proof of concept, we treat past queries and their retrieved evidence as source materials of memory and feed them into the process, so similar needs later reach it directly.</p></div>
+      <div class="card"><div class="tag">Beyond Memory Operations</div><h3>Modeling Future Demand</h3>
+        <p style="margin:0">Many systems build memory <b>ahead of time (AoT)</b>, before any query arrives. Without knowing future demand, it is unclear which deviations will help.
+          To cover a broader range of possible queries, AoT systems may need to process more information in more elaborate ways, making it increasingly expensive. <b>Just-in-time (JiT)</b> memory waits for the query and can choose
+          more targeted deviations, but moves the cost online and adds user-facing latency.
+          <br>A middle ground is to <b>model the future demand</b>. Personal-agent queries are not purely random. Past interests, habits and access patterns give a prior over
+          what information is likely to matter, so construction can spend effort more selectively. From this view, memory can partly be seen as an
+          <b>implicit recommendation system</b> that estimates the future relevance of past information.</p></div>
     </div>
   </section>
 
   <!-- ===================== BibTeX ===================== -->
   <section class="block" id="bibtex">
-    <h2 class="section-title">BibTeX</h2>
+    <h3>BibTeX</h3>
     <pre class="bib">Coming soon.</pre>
   </section>
 
@@ -508,6 +722,7 @@
 <button id="totop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
 </div>
 
+<script src="static/js/memtax_data.js"></script>
 <script>
 // ---------------- Leaderboard (Table 1) ----------------
 const BENCHES = ["LongMemEval-s", "PersonaMem-v2", "MINT-Eval"];
@@ -589,14 +804,12 @@ renderLB();
 // ---------------- Pareto galleries ----------------
 const PARETO = {
   tokens: [
-    ["LongMemEval-s · 27B", "4_lme_27b_score-token.png"],
-    ["LongMemEval-s · Luna", "4_lme_luna_score-token.png"],
+    ["LME-s · Luna", "4_lme_luna_score-token.png"],
     ["PersonaMem-v2 · 27B", "4_persona_27b_score-token.png"],
-    ["MINT-Eval · 27B", "4_mint_27b_score-token.png"],
     ["MINT-Eval · 4B", "4_mint_4b_score-token.png"],
   ],
   calls: [
-    ["LongMemEval-s · Luna", "4_lme_luna_score-calls.png"],
+    ["LME-s · Luna", "4_lme_luna_score-calls.png"],
     ["PersonaMem-v2 · 27B", "4_persona_27b_score-calls.png"],
     ["MINT-Eval · 4B", "4_mint_4b_score-calls.png"],
   ],
@@ -615,6 +828,254 @@ Object.entries(PARETO).forEach(([key, items]) => {
   });
   show(0);
 });
+
+// ---------------- Benefit vs. tax ledger and paired cases ----------------
+(() => {
+  const $ = q => document.querySelector(q);
+  const pills = (sel, items, onPick, start = 0) => {
+    const el = $(sel);
+    const btns = items.map((label, i) => {
+      const b = document.createElement("button");
+      b.className = "pill"; b.innerHTML = label;
+      b.onclick = () => { btns.forEach((x, j) => x.classList.toggle("on", j === i)); onPick(i); };
+      el.appendChild(b); return b;
+    });
+    btns[start].classList.add("on"); onPick(start);
+  };
+  const sign = x => (x > 0 ? "+" : x < 0 ? "−" : "±") + Math.abs(x);
+
+  const BASES = [["4b", "Qwen3.5-4B"], ["27b", "Qwen3.6-27B"], ["luna", "GPT-5.6 Luna"]];
+  const BKS = [["lme", "LongMemEval-s"], ["pm", "PersonaMem-v2"], ["mint", "MINT-Eval"]];
+  let base = 1, bench = 0, sel = "MemoryOS";
+  const box = $("#ledger"), rc = $("#receipt");
+  function render() {
+    const L = LEDGER[BASES[base][0] + "_" + BKS[bench][0]], rag = L._rag;
+    const rows = Object.entries(L).filter(([k]) => k !== "_rag")
+      .map(([name, x]) => ({name, n: x[0], ben: x[1], both: x[2], tax: x[3], tok: x[4], net: x[1] - x[3]}))
+      .sort((a, b) => b.net - a.net);
+    const max = Math.max(...rows.map(r => Math.max(r.ben, r.tax)));
+    if (!sel || !rows.find(r => r.name === sel)) sel = rows[0].name;
+    // Row nodes are reused so bar widths animate between settings.
+    const old = Object.fromEntries([...box.children].map(el => [el.dataset.name, el]));
+    box.innerHTML = "";
+    rows.forEach(r => {
+      let el = old[r.name];
+      if (!el) {
+        el = document.createElement("div");
+        el.className = "lrow"; el.dataset.name = r.name;
+        el.innerHTML = `<span class="nm"></span><div class="bars"><div class="l"><i></i><b></b></div><div class="r"><i></i><b></b></div></div><span class="net"></span><span class="mult"></span>`;
+      }
+      el.onclick = () => { sel = r.name; render(); };
+      el.classList.toggle("sel", r.name === sel);
+      el.querySelector(".nm").textContent = r.name;
+      const wl = 100 * r.tax / max, wr = 100 * r.ben / max;
+      el.querySelector(".l i").style.width = wl + "%";
+      el.querySelector(".r i").style.width = wr + "%";
+      const lb = el.querySelector(".l b"), rb = el.querySelector(".r b");
+      lb.textContent = r.tax; rb.textContent = r.ben;
+      lb.style.right = (wl > 80 ? 4 : wl + 2) + "%"; lb.style.color = wl > 80 ? "#fff" : "";
+      rb.style.left = (wr > 80 ? 4 : wr + 2) + "%"; rb.style.color = wr > 80 ? "#fff" : "";
+      const net = el.querySelector(".net");
+      net.textContent = sign(r.net); net.style.color = r.net < 0 ? "var(--tax)" : "var(--benefit)";
+      el.querySelector(".mult").textContent = r.tok ? "×" + Math.round(r.tok / rag[0]) : "–";
+      box.appendChild(el);
+    });
+    const r = rows.find(x => x.name === sel), pts = Math.abs(100 * r.net / r.n).toFixed(1);
+    rc.innerHTML = `
+      <h4>MEMORY TAX RECEIPT</h4>
+      <div class="sub">${BKS[bench][1]} · ${BASES[base][1]}</div>
+      <span class="stamp ${r.net < 0 ? "neg" : "pos"}">NET ${sign(r.net)}</span>
+      <div class="ln"><span>system</span><span>${r.name}</span></div>
+      <div class="ln"><span>questions</span><span>${r.n.toLocaleString("en-US")}</span></div>
+      <hr>
+      <div class="ln"><span>both right</span><span>${r.both}</span></div>
+      <div class="ln"><span>only memory right</span><span style="color:var(--benefit)">+${r.ben}</span></div>
+      <div class="ln"><span>only RAG right</span><span style="color:var(--tax)">−${r.tax}</span></div>
+      <hr>
+      <div class="ln tot"><span>NET VALUE</span><span style="color:${r.net < 0 ? "var(--tax)" : "var(--benefit)"}">${sign(r.net)} q (${r.net < 0 ? "−" : "+"}${pts} pts)</span></div>
+      <hr>
+      <div class="sub" style="margin:8px 0 0">reference: RAG (1rd), same backbone${BASES[base][0] === "luna" && BKS[bench][0] === "lme" ? "<br>100-question subset" : ""}</div>`;
+    rc.classList.remove("flash"); void rc.offsetWidth; rc.classList.add("flash");
+  }
+  pills("#bill-base", BASES.map(b => b[1]), i => { base = i; render(); }, 1);
+  pills("#bill-bench", BKS.map(b => b[1]), i => { bench = i; render(); }, 0);
+
+  const mark = ok => ok ? `<i class="fas fa-check ok"></i>` : `<i class="fas fa-xmark no"></i>`;
+  const card = (side, c, sys) => `
+    <div class="ecard ${side}">
+      <div class="lab">${side === "b" ? "Memory benefit" : "Memory tax"}</div>
+      <div class="q">${c.q}</div>
+      <div class="ans">${mark(c.rag[1])} <b>RAG (1rd):</b> ${c.rag[0]}</div>
+      <div class="snip raw"><span class="who">retrieved raw chunk</span>${c.ragSnip}</div>
+      <div class="ans" style="margin-top:12px">${mark(c.mem[1])} <b>${sys}:</b> ${c.mem[0]}</div>
+      ${c.units.map(u => `<div class="snip mem"><span class="who">memory unit</span>${u}</div>`).join("")}
+      <div class="enote"><i class="fas ${side === "b" ? "fa-check" : "fa-triangle-exclamation"}"></i>${c.note}</div>
+    </div>`;
+  pills("#mech-pills", DUAL.map(d => d.mech), i => {
+    const d = DUAL[i];
+    $("#mech-desc").innerHTML = `<b>${d.sys}</b> · ${d.bench}. ${d.desc}`;
+    $("#edge-pair").innerHTML = card("b", d.b, d.sys) + card("t", d.t, d.sys);
+  });
+})();
+
+// ---------------- Name wall ----------------
+(() => {
+  // Memory systems cited in our paper and in two recent surveys (arXiv 2512.13564, 2602.06052).
+  const ROW1 = ["Mem0", "MemGPT", "A-Mem", "MemoryBank", "MemOS", "MemoryOS", "Zep", "LightMem", "SimpleMem", "MIRIX", "Memory-R1",
+    "MemAgent", "MEM1", "MemGen", "HippoRAG", "HippoRAG2", "MemoRAG", "Nemori", "EverMemOS", "O-Mem", "H-MEM", "LEGOMem", "MemoryLLM",
+    "M+", "LM2", "Memory³", "Titans", "MemoChat", "Think-in-Memory", "RET-LLM", "SCM", "SeCom", "ChatDB", "RecurrentGPT", "MemInsight",
+    "MemVerse", "Memoria", "MemWeaver", "MemReasoner", "LiCoMemory", "RGMem", "SGMem", "SEDM", "CAM", "D-SMART"];
+  const ROW2 = ["G-Memory", "ReasoningBank", "Memᵖ", "Agent Workflow Memory", "ExpeL", "Dynamic Cheatsheet", "MemEvolve", "Evo-Memory",
+    "Mem-α", "MemSkill", "Memento", "MemTool", "ToolMem", "MemSearcher", "AriGraph", "KARMA", "Synapse", "MemoTime",
+    "BudgetMem", "MAGMA", "PlugMem", "Mem-T", "Memory-R2", "OpenViking", "EverOS", "memU",
+    "LycheeMem", "TencentDB Agent Memory", "GAM", "General Agentic Memory", "Chain-of-Memory", "LazyMem", "Zero-Mem", "MemReader",
+    "HiAgent", "Memex(RL)", "Metis", "δ-mem", "LiveMem", "Just-in-Time Memory", "SkillPro"];
+  const fill = (id, names) => {
+    const html = names.map(n => `<span>${n}</span>`).join("");
+    document.getElementById(id).innerHTML = html + html;   // two copies for a seamless loop
+  };
+  if (document.getElementById("nw1")) { fill("nw1", ROW1); fill("nw2", ROW2); }
+})();
+
+// ---------------- Paper-count trend ----------------
+(() => {
+  // arXiv API counts per quarter (queried 2026-10-26): ti:memory AND (abs:LLM OR abs:"language model" OR abs:agent(s))
+  // AND (cat:cs.CL OR cat:cs.AI OR cat:cs.LG). 2026 Q4 runs to Oct 25.
+  const N = [43, 66, 52, 72, 87, 102, 109, 186, 342, 536, 552, 215];   // 2024 Q1 to 2026 Q4
+  const max = Math.max(...N), bars = document.getElementById("trend-bars");
+  bars.innerHTML = N.map((n, i) => {
+    const y = 2024 + Math.floor(i / 4), q = i % 4 + 1;
+    return `<div class="b ${y === 2026 ? "y26" : ""} ${i === N.length - 1 ? "part" : ""}" title="${y} Q${q}: ${n} papers${i === N.length - 1 ? " (to Oct 25)" : ""}"><i data-h="${100 * n / max}"></i><span>${n}</span></div>`;
+  }).join("");
+  document.getElementById("trend-years").innerHTML = [2024, 2025, 2026].map(y => `<div>${y}</div>`).join("");
+  const grow = () => bars.querySelectorAll(".b").forEach(b => {
+    const h = b.querySelector("i").dataset.h;
+    b.querySelector("i").style.height = h + "%";
+    b.querySelector("span").style.bottom = `calc(${h}% + 2px)`;
+  });
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { setTimeout(grow, 150); io.disconnect(); } }), {threshold: .4});
+  io.observe(bars);
+})();
+
+// ---------------- Case studies: faithfulness and accessibility ----------------
+(() => {
+  const $ = q => document.querySelector(q);
+  const pills = (sel, items, onPick) => {
+    const el = $(sel);
+    const btns = items.map((label, i) => {
+      const b = document.createElement("button");
+      b.className = "pill"; b.innerHTML = label;
+      b.onclick = () => { btns.forEach((x, j) => x.classList.toggle("on", j === i)); onPick(i); };
+      el.appendChild(b); return b;
+    });
+    btns[0].classList.add("on"); onPick(0);
+  };
+
+  // What each system kept from one raw turn.
+  const LV = {nl: "NO LOSS", pl: "PARTIAL LOSS", ml: "MAJOR LOSS", nu: "NO MEMORY UNIT"};
+  pills("#follow-pills", FOLLOW.map(f => f.label), i => {
+    const f = FOLLOW[i];
+    $("#follow-raw").innerHTML = `<span class="who">${f.who}</span>${f.raw}`;
+    $("#follow-q").innerHTML = `<b>Later question:</b> ${f.q}`;
+    $("#follow-sys").innerHTML = f.sys.map(([sys, lv, txt, lost], k) => `
+      <div class="sysrow" style="animation-delay:${k * 0.12}s">
+        <div class="hd"><span class="lv ${lv}">${LV[lv]}</span>${sys}</div>
+        ${lv === "nu" ? `<div class="nounit">Nothing in the store traces back to this turn.</div>` : `<div class="snip mem">${txt}</div>`}
+        ${lost ? `<div class="lost"><i class="fas fa-triangle-exclamation"></i> ${lost}</div>` : ""}
+      </div>`).join("");
+  });
+
+  // Retrieval replay, final state: each unit carries the round in which it is first retrieved.
+  pills("#replay-pills", REPLAY.map(r => r.label), i => {
+    const C = REPLAY[i];
+    $("#replay-q").innerHTML = `<b>Question:</b> ${C.q}`;
+    $("#rag-badge").textContent = `ROUND 1 / ${C.rag[1]}`;
+    $("#rag-badge").className = "rbadge hit";
+    $("#rag-col").innerHTML = `<div class="runit on"><div class="snip raw"><span class="who">raw turn</span>${C.raw}</div></div>`;
+    $("#mem-h").textContent = C.sys;
+    $("#mem-col").innerHTML = C.units.map(([r, t]) => {
+      const lbl = C.beyond && r > C.max ? `ROUND >${C.max}` : `ROUND ${r} / ${C.max}`;
+      return `<div class="runit on"><span class="rbadge ${r === 1 ? "hit" : "late"}">${lbl}</span><div class="snip mem">${t}</div></div>`;
+    }).join("");
+    $("#rstatus").innerHTML = `<i class="fas fa-triangle-exclamation" style="color:var(--tax)"></i> ${C.beyond ? `Still missing after all ${C.max} rounds.` : `${C.sys} completes the evidence in round ${C.need}.`} ${C.why}`;
+  });
+})();
+
+// ---------------- Design implications: match the card to the table height ----------------
+(() => {
+  const card = document.querySelector(".grid2.impl > div:first-child .card");
+  const tbl = document.querySelector(".grid2.impl .tbl-wrap");
+  const fit = () => { card.style.minHeight = window.innerWidth > 760 ? tbl.offsetHeight + "px" : ""; };
+  window.addEventListener("resize", fit); window.addEventListener("load", fit); fit();
+})();
+
+// ---------------- Robustness: animated accuracy drop when the QA model changes ----------------
+(() => {
+  // From the paper's robustness figure: [construction model, score with stronger QA, score with weaker QA].
+  const PANELS = [
+    {bench: "PersonaMem-v2", strong: "27B", weak: "4B", rag: [46.8, 37.15], lo: 30, hi: 52, step: 5,
+     rows: {"SimpleMem": [["4B", 45.29, 34.69], ["27B", 46.68, 34.90], ["luna", 48.18, 35.97]],
+            "LightMem": [["4B", 47.22, 36.40], ["27B", 47.00, 36.40], ["luna", 50.43, 37.79]],
+            "MAGMA": [["4B", 42.18, 33.08], ["27B", 40.47, 32.76], ["luna", 40.69, 31.80]]}},
+    {bench: "MINT-Eval", strong: "luna", weak: "27B", rag: [29.9, 28.6], lo: 18, hi: 40, step: 5,
+     rows: {"A-Mem": [["4B", 27.81, 24.15], ["27B", 27.62, 24.41], ["luna", 27.55, 24.86]],
+            "MemOS": [["4B", 27.94, 22.41], ["27B", 28.52, 19.72], ["luna", 30.31, 23.31]],
+            "PlugMem": [["4B", 36.93, 32.63], ["27B", 36.61, 33.27], ["luna", 37.57, 33.53]]}},
+  ];
+  const SHAPE = {
+    "4B": c => `<svg viewBox="0 0 16 16"><polygon points="8,1.8 14.6,14.2 1.4,14.2" fill="#fff" stroke="${c}" stroke-width="2"/></svg>`,
+    "27B": c => `<svg viewBox="0 0 16 16"><rect x="2.4" y="2.4" width="11.2" height="11.2" fill="#fff" stroke="${c}" stroke-width="2"/></svg>`,
+    "luna": c => `<svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#fff" stroke="${c}" stroke-width="2"/></svg>`,
+  };
+  const GREY = "#6b7280", RED = "#b5534b", GREEN = "#4e8b5f";
+  const box = document.getElementById("robust");
+  const fmt = d => "Δ " + (d < 0 ? "−" : "+") + Math.abs(d).toFixed(1);
+  const render = () => { box.innerHTML = PANELS.map(P => {
+    const X = v => (100 * (v - P.lo) / (P.hi - P.lo));
+    const rd = P.rag[1] - P.rag[0];
+    const row = (sy, bu, hi, lo, cls, col, ref) => {
+      const a = Math.min(hi, lo), w = Math.abs(hi - lo);
+      return `<div class="rb-row ${cls}"><span class="sy">${sy}</span><span class="bu">${bu}</span>
+        <div class="rb-track">
+          ${ticks}
+          <span class="rb-ref" style="left:${X(hi + rd)}%;width:${X(hi) - X(hi + rd)}%"></span>
+          <span class="rb-seg" data-w="${X(a + w) - X(a)}" style="left:${X(a)}%;width:0;background:${col}"></span>
+          <span class="rb-m" style="left:${X(hi)}%">${SHAPE[P.strong](col)}</span>
+          <span class="rb-m mv" data-x="${X(lo)}" style="left:${X(hi)}%">${SHAPE[P.weak](col)}</span>
+        </div><span class="rb-d" style="color:${col}">${fmt(lo - hi)}</span></div>`;
+    };
+    const tickVals = []; for (let t = Math.ceil(P.lo / P.step) * P.step; t <= P.hi; t += P.step) tickVals.push(t);
+    var ticks = tickVals.map(t => `<span class="rb-grid-line" style="left:${X(t)}%"></span>`).join("");
+    let h = `<div class="rb-panel"><div class="rb-title">${P.bench} · ${SHAPE[P.weak]("#1c2b33")} QA-${P.weak} ← ${SHAPE[P.strong]("#1c2b33")} QA-${P.strong}</div>`;
+    h += row("RAG (1rd)", "", P.rag[0], P.rag[1], "rag", GREY, true);
+    Object.entries(P.rows).forEach(([sy, rs]) => rs.forEach(([bu, hi, lo], k) => {
+      const col = Math.abs(lo - hi) > Math.abs(rd) ? RED : GREEN;
+      h += row(k === 0 ? sy : "", bu, hi, lo, k === 0 ? "gs" : "", col, true);
+    }));
+    h += `<div class="rb-axis"><span></span><span></span><div>${tickVals.map(t => `<span style="left:${X(t)}%">${t}</span>`).join("")}</div><span></span></div></div>`;
+    return h;
+  }).join(""); };
+  render();
+  const play = panel => {
+    panel.classList.add("go");
+    panel.querySelectorAll(".rb-row").forEach((r, i) => setTimeout(() => {
+      const m = r.querySelector(".mv"), sg = r.querySelector(".rb-seg");
+      m.style.left = m.dataset.x + "%";
+      // the segment grows from the strong-QA end toward the weak-QA end
+      const hiLeft = parseFloat(r.querySelectorAll(".rb-m")[0].style.left), lo = parseFloat(m.dataset.x);
+      if (lo < hiLeft) { sg.style.left = hiLeft + "%"; sg.style.transition = "none"; void sg.offsetWidth;
+        sg.style.transition = ""; sg.style.left = lo + "%"; sg.style.transitionProperty = "width, left"; }
+      sg.style.width = sg.dataset.w + "%";
+    }, 120 + i * 90));
+  };
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { play(e.target); io.unobserve(e.target); } }), {threshold: .45});
+  box.querySelectorAll(".rb-panel").forEach(p => io.observe(p));
+  document.getElementById("rb-replay").onclick = () => {
+    box.querySelectorAll(".rb-panel").forEach(p => io.unobserve(p));
+    render();
+    setTimeout(() => box.querySelectorAll(".rb-panel").forEach(play), 40);
+  };
+})();
 
 // ---------------- Effects ----------------
 (() => {
