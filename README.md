@@ -1,7 +1,7 @@
 # Memory Tax: Dissecting the Net Value of Agent Memory
 
 <p align="center">
-  <a href="https://hexuan21.github.io/MemoryTax/"><img src="https://img.shields.io/badge/arXiv-Paper-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv"></a>
+  <a href="https://arxiv.org/abs/2610.34073"><img src="https://img.shields.io/badge/arXiv-Paper-b31b1b?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv"></a>
   <a href="https://github.com/hexuan21/MemoryTax/blob/main/docs/Memory_Tax.pdf"><img src="https://img.shields.io/badge/Paper-PDF-ec1c24?style=for-the-badge&logo=adobeacrobatreader&logoColor=white" alt="Paper PDF"></a>
   <a href="https://hexuan21.github.io/MemoryTax/"><img src="https://img.shields.io/badge/Project-Page-1f8acb?style=for-the-badge&logo=googlechrome&logoColor=white" alt="Project Page"></a>
   <a href="https://huggingface.co/datasets/hexuan21/MemoryTax-Res"><img src="https://img.shields.io/badge/HF-Res%20Data-ffd21e?style=for-the-badge&logo=huggingface&logoColor=white&labelColor=000000" alt="Res Data"></a>
@@ -94,5 +94,13 @@ All results are on Hugging Face; [**MemoryTax-Res**](https://huggingface.co/data
 ## Citation
 
 ```bibtex
-TODO
+@misc{he2026memorytaxdissectingnet,
+      title={Memory Tax: Dissecting the Net Value of Agent Memory},
+      author={Xuan He and Sining Zhoubian and Ruozhen Yang and Yuhao Wen and Zhineng Wang and Yuyang Hu and Ke Yang and Yuyu Zhang and Ping Nie and Jiawei Han and ChengXiang Zhai},
+      year={2026},
+      eprint={2610.34073},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2610.34073},
+}
 ```
